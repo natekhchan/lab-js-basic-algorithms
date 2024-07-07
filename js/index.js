@@ -33,18 +33,48 @@ if (hacker1.length > hacker2.length) {
 // Iteration 3: Loops
 
 // 3.1 Print all the characters of the driver's name, separated by a space and in capitals
-console.log(hacker1.toUpperCase().split("").join(" "));
+let driverUpperCase = "";
+for (let i = 0; i < hacker1.length; i++) {
+    driverUpperCase += hacker1[i].toUpperCase();
+    if (i < hacker1.length - 1) {
+        driverUpperCase += " ";
+    }
+}
+console.log(driverUpperCase);
 
 // 3.2 Print all the characters of the navigator's name, in reverse order
-console.log(hacker2.split("").reverse().join(""));
+let navigatorReverse = "";
+for (let i = hacker2.length - 1; i >= 0; i--) {
+    navigatorReverse += hacker2[i];
+}
+console.log(navigatorReverse);
 
 // 3.3 Compare the lexicographic order of the strings
-if (hacker1.localeCompare(hacker2) < 0) {
-  console.log("The driver's name goes first.");
-} else if (hacker1.localeCompare(hacker2) > 0) {
-  console.log("Yo, the navigator goes first definitely.");
+let lexicographicOrder = 0;
+for (let i = 0; i < Math.min(hacker1.length, hacker2.length); i++) {
+    if (hacker1[i].toLowerCase() < hacker2[i].toLowerCase()) {
+        lexicographicOrder = -1;
+        break;
+    } else if (hacker1[i].toLowerCase() > hacker2[i].toLowerCase()) {
+        lexicographicOrder = 1;
+        break;
+    }
+}
+
+if (lexicographicOrder === 0) {
+    if (hacker1.length < hacker2.length) {
+        lexicographicOrder = -1;
+    } else if (hacker1.length > hacker2.length) {
+        lexicographicOrder = 1;
+    }
+}
+
+if (lexicographicOrder < 0) {
+    console.log("The driver's name goes first.");
+} else if (lexicographicOrder > 0) {
+    console.log("Yo, the navigator goes first definitely.");
 } else {
-  console.log("What?! You both have the same name?");
+    console.log("What?! You both have the same name?");
 }
 
 // Bonus Time!
